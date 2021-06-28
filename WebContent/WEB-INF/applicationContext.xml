@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://cxf.apache.org/jaxws 
+	http://cxf.apache.org/schemas/jaxws.xsd">
+	<!-- 导入CXF为扩展Spring提供的几个XML配置文件 -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<!-- 
+	id：指定所定义的Bean在Spring容器中的唯一标识。 
+	implementor：指定Web Services的实现类，或者引用容器中另一个已有的Bean实例：#beanname
+	address：指定所创建的Web Service的地址，因为CXF不知道该Web应用对应的URL，
+	也不知道Web服务器的监听端口。因此address属性指定的只是一个相对地址，
+	CXF将会在运行时动态确定该Web Services的服务地址。	
+	-->
+	<jaxws:endpoint id="myservice" 
+		implementor="com.sjw.webservice.MyServiceImpl" 
+		address="/myservice" /><!-- 访问url：http://localhost:8080/CXF_Spring/webservices/myservice?wsdl -->
+</beans>
